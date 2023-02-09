@@ -8,7 +8,11 @@ const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 0 4rem;
+  position: fixed;
+  z-index: 100;
+  background-color: black;
 `;
+
 const Logo = styled.img`
   width: 9rem;
 `;
