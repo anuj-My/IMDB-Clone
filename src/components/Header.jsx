@@ -35,8 +35,8 @@ const Header = () => {
         <Link to="/">
           <Logo src="https://cdn-icons-png.flaticon.com/512/5977/5977585.png"></Logo>
         </Link>
-        <Link to="movies/poplular">Popular</Link>
-        <Link to="movies/top-rated">Top Rated</Link>
+        <Link to="movies/popular">Popular</Link>
+        <Link to="movies/top_rated">Top Rated</Link>
         <Link to="movies/upcoming">Upcoming</Link>
       </HeaderLeft>
 

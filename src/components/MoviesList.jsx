@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const MovieListContainer = styled.div`
-  width: 86%;
+  width: 83%;
   padding-top: 11rem;
   margin: auto;
 `;
@@ -15,20 +15,18 @@ const Title = styled.h2`
 const ListCards = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 20rem);
-  gap: 2rem;
+  gap: 1rem;
 `;
 
 const MoviesList = () => {
   const [movieList, setMovieList] = useState([]);
-  console.log(movieList);
-
   const { type } = useParams();
 
   const getMoviesData = async () => {
     try {
       const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${
-        type && "popular"
-      }?api_key=329687fabc3ae889caf2b760dd47d231
+        type ? type : "popular"
+      }?api_key=329687fabc3ae889caf2b760dd47d231&language=en-US
       `);
 
       setMovieList(data.results);

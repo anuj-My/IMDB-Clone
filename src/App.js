@@ -1,20 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import Upcoming from "./pages/Upcoming";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import MoviesList from "./components/MoviesList";
+import Movie from "./pages/Movie";
 function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
         <Route index element={<Home />} />
-        <Route
-          path="movie/:id"
-          element={
-            <h1 style={{ color: "white", fontSize: "5rem" }}>movie detail</h1>
-          }
-        />
+        <Route path="movie/:id" element={<Movie />} />
         <Route path="movies/:type" element={<MoviesList />} />
         {/* <Route path="/*" element={<ErrorPage />} />  */}
       </Routes>

@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import Poster from "../components/Poster";
+import MoviesList from "../components/MoviesList";
 
 const Home = () => {
   const [popularMovies, setPopularMoviesData] = useState([]);
   const getPopularMovies = async () => {
     try {
       const { data } = await axios.get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=329687fabc3ae889caf2b760dd47d231"
+        "https://api.themoviedb.org/3/movie/popular?api_key=329687fabc3ae889caf2b760dd47d231&language=en-US"
       );
 
       setPopularMoviesData(data.results);
@@ -36,6 +37,8 @@ const Home = () => {
       >
         {PopularMoviesList}
       </Carousel>
+
+      <MoviesList />
     </>
   );
 };
