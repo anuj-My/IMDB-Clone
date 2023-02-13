@@ -24,7 +24,7 @@ const CardContainer = styled.div`
   position: relative;
   transition: all 0.3s ease;
 
-  ${Link}:hover {
+  a > &:hover {
     transform: scale(1.2);
     z-index: 999;
 

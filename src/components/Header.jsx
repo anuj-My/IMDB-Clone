@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { VscAccount } from "react-icons/vsc";
+import Search from "./Search";
+import Logo from "./Logo";
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -10,12 +13,9 @@ const HeaderContainer = styled.header`
   padding: 0 4rem;
   position: fixed;
   z-index: 100;
-  background-color: black;
+  background-color: #1c1c1c;
 `;
 
-const Logo = styled.img`
-  width: 9rem;
-`;
 const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
@@ -28,19 +28,22 @@ const HeaderLeft = styled.div`
 `;
 const HeaderRight = styled.div``;
 
-const Header = () => {
+const Header = ({ onChangeHandler }) => {
   return (
     <HeaderContainer>
       <HeaderLeft>
         <Link to="/">
-          <Logo src="https://cdn-icons-png.flaticon.com/512/5977/5977585.png"></Logo>
+          <Logo />
         </Link>
         <Link to="movies/popular">Popular</Link>
         <Link to="movies/top_rated">Top Rated</Link>
         <Link to="movies/upcoming">Upcoming</Link>
       </HeaderLeft>
+      <Search onChangeHandler={onChangeHandler} />
 
-      <HeaderRight>Right</HeaderRight>
+      <HeaderRight>
+        <VscAccount style={{ fontSize: "3rem" }} />
+      </HeaderRight>
     </HeaderContainer>
   );
 };
