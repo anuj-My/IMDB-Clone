@@ -1,13 +1,14 @@
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "react-multi-carousel/lib/styles.css";
 import YouTube from "react-youtube";
 import Card from "../components/Card";
 import ImageInfoCard from "../components/ImageInfoCard";
 import { AiFillStar } from "react-icons/ai";
 import { IoMdCloseCircle } from "react-icons/io";
+import { MdArrowBackIosNew } from "react-icons/md";
+import { MdArrowForwardIos } from "react-icons/md";
 
 const MovieDetailPage = styled.div`
   position: relative;
@@ -131,6 +132,7 @@ const Button = styled.button`
 const Carousel = styled.div`
   height: 25rem;
   position: relative;
+  margin: 2rem 0 4rem 0;
 `;
 const CarouselBox = styled.div`
   height: 25rem;
@@ -139,6 +141,7 @@ const CarouselBox = styled.div`
   padding-bottom: 1rem;
   display: flex;
   align-items: center;
+  scroll-behavior: smooth;
 `;
 const Arrow = styled.a`
   color: white;
@@ -148,9 +151,10 @@ const Arrow = styled.a`
   line-height: 25rem;
   font-size: 2.5rem;
   text-align: center;
-  background-color: lightgreen;
+  background-color: #181818ea;
   top: 0;
   z-index: 3;
+  cursor: pointer;
 `;
 const LeftArrow = styled(Arrow)`
   position: absolute;
@@ -234,23 +238,38 @@ const SimilarMovieHead = styled.h1`
 `;
 const SmList = styled.div`
   display: grid;
-  grid-template-columns: repeat(6, 20rem);
   gap: 1rem;
+  grid-template-columns: repeat(auto-fill, 20rem);
+  grid-template-rows: masonry;
+  justify-content: center;
 `;
 
 const Movie = () => {
+  const boxref = useRef();
   const [movieDetails, setMovieDetails] = useState(null);
   const [similarMovies, setSimilarMovies] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
   const [playTrailer, setPlayTrailer] = useState(false);
   const { id } = useParams();
-
   useEffect(() => {
     getMovieDetails();
     getSimilarMovies();
     getMovieCast();
     window.scrollTo(0, 0);
   }, [id]);
+
+  // ======slider======
+  const onClickHandler = (direction) => {
+    const container = boxref.current;
+    const card = boxref.current.firstElementChild;
+
+    if (direction === "left") {
+      container.scrollLeft = container.scrollLeft - card.clientWidth + 6;
+    }
+    if (direction === "right") {
+      container.scrollLeft = container.scrollLeft + card.clientWidth + 6;
+    }
+  };
 
   const getMovieDetails = async () => {
     try {
@@ -360,15 +379,19 @@ const Movie = () => {
               <h1>Casts</h1>
               <Carousel>
                 {movieCast && (
-                  <CarouselBox>
+                  <CarouselBox ref={boxref}>
                     {movieCast.map((cast) => {
                       return <ImageInfoCard cast={cast} key={cast.id} />;
                     })}
                   </CarouselBox>
                 )}
 
-                <LeftArrow>&#60;</LeftArrow>
-                <RightArrow>&#62;</RightArrow>
+                <LeftArrow onClick={() => onClickHandler("left")}>
+                  <MdArrowBackIosNew />
+                </LeftArrow>
+                <RightArrow onClick={() => onClickHandler("right")}>
+                  <MdArrowForwardIos />
+                </RightArrow>
               </Carousel>
             </div>
 

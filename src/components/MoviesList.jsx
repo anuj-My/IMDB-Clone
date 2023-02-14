@@ -10,12 +10,19 @@ const MovieListContainer = styled.div`
   margin: auto;
 `;
 const Title = styled.h2`
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  font-weight: 500;
+  font-size: 3.4rem;
+  letter-spacing: 3px;
+
+  /* text-align: center; */
 `;
 const ListCards = styled.div`
   display: grid;
-  grid-template-columns: repeat(6, 20rem);
   gap: 1rem;
+  grid-template-columns: repeat(auto-fill, 20rem);
+  grid-template-rows: masonry;
+  justify-content: center;
 `;
 
 const MoviesList = () => {

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ItemContainer = styled.div`
-  margin: 0 0.5rem;
+  margin: 0 0.3rem;
 `;
 const ImageContainer = styled.div`
   width: 18rem;

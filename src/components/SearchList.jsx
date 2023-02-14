@@ -11,8 +11,10 @@ const Title = styled.h2`
 `;
 const ListCards = styled.div`
   display: grid;
-  grid-template-columns: repeat(6, 20rem);
   gap: 1rem;
+  grid-template-columns: repeat(auto-fill, 20rem);
+  grid-template-rows: masonry;
+  justify-content: center;
 `;
 
 const SearchList = ({ searchList, searchInput }) => {
