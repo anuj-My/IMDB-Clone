@@ -5,25 +5,28 @@ import { AiFillStar } from "react-icons/ai";
 const PosterContainer = styled.div`
   position: relative;
   width: 100%;
+  height: 99vh;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 const PosterImage = styled.div`
   width: 100%;
-  height: 60rem;
+  height: 100%;
 `;
 const Image = styled.img`
-  /* padding-bottom: 20rem; */
   margin: auto;
   display: block;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-position: center center;
 `;
 const PosterOverlay = styled.div`
   position: absolute;
   padding: 10rem;
   bottom: 0px;
-  height: 70%;
+  height: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;

@@ -1,9 +1,16 @@
 import axios from "axios";
+import styled from "styled-components";
 import { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import Poster from "../components/Poster";
 import MoviesList from "../components/MoviesList";
+
+const CustomCarousel = styled(Carousel)`
+  .control-dots {
+    bottom: 30px;
+  }
+`;
 
 const Home = () => {
   const [popularMovies, setPopularMoviesData] = useState([]);
@@ -28,15 +35,16 @@ const Home = () => {
   });
   return (
     <>
-      <Carousel
+      <CustomCarousel
         autoPlay={true}
+        // showIndicators={false}
         transitionTime={3}
         infiniteLoop={true}
         showThumbs={false}
         showStatus={false}
       >
         {PopularMoviesList}
-      </Carousel>
+      </CustomCarousel>
 
       <MoviesList />
     </>

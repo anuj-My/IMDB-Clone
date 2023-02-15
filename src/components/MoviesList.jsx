@@ -8,6 +8,7 @@ const MovieListContainer = styled.div`
   width: 83%;
   padding-top: 11rem;
   margin: auto;
+  min-height: 100vh;
 `;
 const Title = styled.h2`
   margin-bottom: 3rem;
@@ -15,7 +16,7 @@ const Title = styled.h2`
   font-size: 3.4rem;
   letter-spacing: 3px;
 
-  /* text-align: center; */
+  text-align: center;
 `;
 const ListCards = styled.div`
   display: grid;

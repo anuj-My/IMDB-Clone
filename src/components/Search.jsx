@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+const Container = styled.div``;
+
 const Input = styled.input`
-  width: 90rem;
+  width: 100%;
   height: 5rem;
   font-size: 2rem;
   border-radius: 3rem;
@@ -10,13 +12,13 @@ const Input = styled.input`
   font-weight: bold;
 
   &:focus {
-    outline-color: yellow;
+    outline-color: red;
   }
 `;
 
 const Search = ({ onChangeHandler, searchInput }) => {
   return (
-    <div>
+    <Container>
       <Link to={`search`}>
         <Input
           type="text"
@@ -25,7 +27,7 @@ const Search = ({ onChangeHandler, searchInput }) => {
           placeholder="Search movies"
         />
       </Link>
-    </div>
+    </Container>
   );
 };
 

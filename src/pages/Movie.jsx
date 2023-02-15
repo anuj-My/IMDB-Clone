@@ -45,13 +45,27 @@ const MovieContainer = styled.div`
   display: ${({ playTrailer }) => playTrailer && "none"};
 `;
 const MovieInfoWrapper = styled.div`
-  width: 80%;
+  width: 83%;
+
+  @media screen and (max-width: 1280px) {
+    width: 100%;
+  }
 `;
 
 const MovieBackground = styled.div`
-  width: 100%;
+  max-width: 100%;
   height: 50rem;
-  background-color: rgba(0, 0, 0, 0.78);
+  background-image: linear-gradient(
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.7)
+  );
+
+  @media screen and (max-width: 860px) {
+    /* position: static; */
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+  }
 `;
 const BackgroundImage = styled.img`
   z-index: -1;
@@ -63,6 +77,12 @@ const BackgroundImage = styled.img`
 const MovieDetailContainer = styled.div`
   position: relative;
   height: 23rem;
+
+  @media screen and (max-width: 860px) {
+    /* position: static; */
+    height: 0;
+    margin-bottom: 4rem;
+  }
 `;
 const Left = styled.div`
   position: relative;
@@ -73,6 +93,10 @@ const PosterContainer = styled.div`
   position: absolute;
   bottom: -19rem;
   left: 4rem;
+
+  @media screen and (max-width: 860px) {
+    display: none;
+  }
 `;
 const PosterImage = styled.img`
   width: 100%;
@@ -82,7 +106,17 @@ const Right = styled.div`
   position: absolute;
   left: 32rem;
   top: -22rem;
-  width: 75%;
+  max-width: 73%;
+
+  @media screen and (max-width: 1280px) {
+    width: 60%;
+  }
+
+  @media screen and (max-width: 860px) {
+    /* position: static; */
+    left: 2rem;
+    top: -55rem;
+  }
 `;
 const DetailRightTop = styled.div`
   margin-bottom: 4rem;
@@ -129,6 +163,13 @@ const Button = styled.button`
   border-radius: 3rem;
 `;
 
+const Casts = styled.div``;
+const CastsHeading = styled.h1`
+  padding-left: 2rem;
+  font-size: 3.6rem;
+  letter-spacing: 2px;
+`;
+
 const Carousel = styled.div`
   height: 25rem;
   position: relative;
@@ -151,22 +192,25 @@ const Arrow = styled.a`
   line-height: 25rem;
   font-size: 2.5rem;
   text-align: center;
-  background-color: #181818ea;
+  background-color: #1818189f;
   top: 0;
   z-index: 3;
   cursor: pointer;
 `;
 const LeftArrow = styled(Arrow)`
   position: absolute;
-  left: -5rem;
+  left: 0rem;
+  display: ${({ movieCast }) => movieCast.length < 6 && "none"};
 `;
 const RightArrow = styled(Arrow)`
+  display: ${({ movieCast }) => movieCast.length < 6 && "none"};
   position: absolute;
-  right: -5rem;
+  right: 0rem;
 `;
 
 const MovieLinks = styled.div`
   margin-top: 3rem;
+  padding: 0 2rem;
   display: flex;
   gap: 19rem;
   align-items: center;
@@ -188,12 +232,14 @@ const ProdTitle = styled.div`
   font-size: 4rem;
   color: black;
   font-weight: 500;
-  margin-bottom: 2.5rem;
+  margin-bottom: 4.5rem;
 `;
 const Companies = styled.div`
   display: flex;
-  gap: 2.5rem;
+  flex-wrap: wrap;
+  gap: 3rem;
   align-items: center;
+  justify-content: center;
 `;
 
 const CompanyContainer = styled.div`
@@ -235,6 +281,7 @@ const SimilarMovieList = styled.div`
 `;
 const SimilarMovieHead = styled.h1`
   margin-bottom: 2rem;
+  text-align: center;
 `;
 const SmList = styled.div`
   display: grid;
@@ -248,7 +295,7 @@ const Movie = () => {
   const boxref = useRef();
   const [movieDetails, setMovieDetails] = useState(null);
   const [similarMovies, setSimilarMovies] = useState(null);
-  const [movieCast, setMovieCast] = useState(null);
+  const [movieCast, setMovieCast] = useState([]);
   const [playTrailer, setPlayTrailer] = useState(false);
   const { id } = useParams();
   useEffect(() => {
@@ -375,8 +422,8 @@ const Movie = () => {
                 </DetailRightBottom>
               </Right>
             </MovieDetailContainer>
-            <div>
-              <h1>Casts</h1>
+            <Casts>
+              <CastsHeading>Casts</CastsHeading>
               <Carousel>
                 {movieCast && (
                   <CarouselBox ref={boxref}>
@@ -386,14 +433,20 @@ const Movie = () => {
                   </CarouselBox>
                 )}
 
-                <LeftArrow onClick={() => onClickHandler("left")}>
+                <LeftArrow
+                  movieCast={movieCast}
+                  onClick={() => onClickHandler("left")}
+                >
                   <MdArrowBackIosNew />
                 </LeftArrow>
-                <RightArrow onClick={() => onClickHandler("right")}>
+                <RightArrow
+                  movieCast={movieCast}
+                  onClick={() => onClickHandler("right")}
+                >
                   <MdArrowForwardIos />
                 </RightArrow>
               </Carousel>
-            </div>
+            </Casts>
 
             <MovieLinks>
               <Title>Useful Links</Title>
@@ -421,7 +474,6 @@ const Movie = () => {
                 {movieDetails.production_companies.length ? (
                   movieDetails.production_companies.map((company) => {
                     return (
-                      // <>
                       <CompanyContainer key={company.id}>
                         {company.logo_path ? (
                           <CompanyLogo
@@ -433,7 +485,6 @@ const Movie = () => {
                           </CompanyName>
                         )}
                       </CompanyContainer>
-                      // </>
                     );
                   })
                 ) : (

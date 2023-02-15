@@ -7,10 +7,11 @@ import Logo from "./Logo";
 const HeaderContainer = styled.header`
   width: 100%;
   height: 10rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(29%, 29%) minmax(59%, 59%) minmax(12%, 12%);
+  gap: 4rem;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 4rem;
+  padding: 0 5rem;
   position: fixed;
   z-index: 100;
   background-color: #1c1c1c;
