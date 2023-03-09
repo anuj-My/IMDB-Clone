@@ -1,16 +1,21 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { SearchContext } from "../context/SearchProvider";
 import Card from "./Card";
+import Search from "./Search";
 
 const SearchListContainer = styled.div`
   width: 83%;
-  padding-top: 11rem;
+  padding-top: 14rem;
   margin: auto;
   min-height: 100vh;
 `;
 const Title = styled.h2`
   margin-bottom: 3rem;
-  font-size: 3.2rem;
+  font-size: 2.6rem;
+  font-weight: 500;
   text-align: center;
+  margin-top: 3rem;
 `;
 const ListCards = styled.div`
   display: grid;
@@ -24,14 +29,21 @@ const Message = styled.p`
   font-weight: 500;
   font-size: 4rem;
   display: grid;
-  height: 75vh;
+  height: 55vh;
   justify-content: center;
   align-items: center;
 `;
 
-const SearchList = ({ searchList, searchInput }) => {
+const SearchList = () => {
+  const { searchList, searchInput, onChangeHandler, submitHandler } =
+    useContext(SearchContext);
   return (
     <SearchListContainer>
+      <Search
+        onChangeHandler={onChangeHandler}
+        submitHandler={submitHandler}
+        searchInput={searchInput}
+      />
       <Title>Search Results For: {searchInput}</Title>
       {searchInput === "" && <Message>Please Search a Movie</Message>}
 

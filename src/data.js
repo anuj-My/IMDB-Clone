@@ -11,4 +11,8 @@ export const LinkData = [
     url: "movies/upcoming",
     title: "Upcoming",
   },
+  {
+    url: "/search",
+    title: "Search Movies",
+  },
 ];

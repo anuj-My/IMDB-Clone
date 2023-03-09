@@ -12,7 +12,7 @@ const Input = styled.input`
   padding: 1.6rem 2rem;
   font-weight: bold;
   background-color: #00000082;
-  border: none;
+  border: 2px solid white;
   color: white;
 
   @media screen and (max-width: 750px) {
@@ -28,23 +28,21 @@ const Input = styled.input`
   }
 
   &:focus {
-    outline-color: red;
+    box-shadow: rgba(101, 101, 101, 0.35) 0px 5px 15px;
   }
 `;
 
 const Search = ({ onChangeHandler, submitHandler, searchInput }) => {
   return (
     <Container>
-      <Link to={`search`}>
-        <Form onSubmit={submitHandler}>
-          <Input
-            type="search"
-            onChange={onChangeHandler}
-            value={searchInput}
-            placeholder="Search movies"
-          />
-        </Form>
-      </Link>
+      <Form onSubmit={submitHandler}>
+        <Input
+          type="search"
+          onChange={onChangeHandler}
+          value={searchInput}
+          placeholder="Search movies"
+        />
+      </Form>
     </Container>
   );
 };

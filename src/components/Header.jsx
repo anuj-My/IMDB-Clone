@@ -50,7 +50,7 @@ const HeaderLeft = styled.div`
     z-index: 100;
     flex-direction: column;
     justify-content: center;
-    background-color: cadetblue;
+    background-color: #1c1c1c;
     transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 `;
@@ -76,7 +76,7 @@ const Btn = styled(HiMenuAlt1)`
   }
 `;
 
-const Header = ({ submitHandler, onChangeHandler }) => {
+const Header = () => {
   const [toggle, setToggle] = useState(false);
   const menuRef = useRef();
   const el = menuRef?.current;
@@ -96,8 +96,6 @@ const Header = ({ submitHandler, onChangeHandler }) => {
         <NavLinkList />
       </HeaderLeft>
       <Btn onClick={() => setToggle(!toggle)} />
-
-      <Search onChangeHandler={onChangeHandler} submitHandler={submitHandler} />
     </HeaderContainer>
   );
 };

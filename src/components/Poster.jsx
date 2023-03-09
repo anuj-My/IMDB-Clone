@@ -4,7 +4,7 @@ import { AiFillStar } from "react-icons/ai";
 const PosterContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +25,7 @@ const PosterOverlay = styled.div`
   position: absolute;
   padding: 10rem;
   bottom: 0px;
-  height: 100%;
+  height: 70vh;
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
@@ -35,11 +35,11 @@ const PosterOverlay = styled.div`
   transition: opacity 0.3s;
 
   @media screen and (max-width: 760px) {
-    padding: 10rem 5rem 14rem 5rem;
+    padding: 10rem 5rem;
   }
 
   @media screen and (max-width: 560px) {
-    padding: 10rem 1rem 14rem 1rem;
+    padding: 10rem 1rem;
   }
 
   &:hover {
@@ -52,11 +52,15 @@ const Title = styled.div`
   margin-bottom: 1rem;
 
   @media screen and (max-width: 760px) {
-    font-size: 4.4rem;
+    font-size: 4rem;
   }
 
   @media screen and (max-width: 560px) {
-    font-size: 3.6rem;
+    font-size: 3rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    font-size: 2.4rem;
   }
 `;
 const Runtime = styled.div`
@@ -68,11 +72,15 @@ const Runtime = styled.div`
   }
 
   @media screen and (max-width: 760px) {
-    font-size: 3rem;
+    font-size: 2.6rem;
   }
 
   @media screen and (max-width: 560px) {
-    font-size: 2.6rem;
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    font-size: 1.6rem;
   }
 `;
 const Rating = styled.span`
@@ -81,11 +89,15 @@ const Rating = styled.span`
   font-size: 3.5rem;
 
   @media screen and (max-width: 760px) {
-    font-size: 3rem;
+    font-size: 2.6rem;
   }
 
   @media screen and (max-width: 560px) {
-    font-size: 2.6rem;
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    font-size: 1.6rem;
   }
 `;
 const Description = styled.div`
@@ -100,6 +112,14 @@ const Description = styled.div`
 
   @media screen and (max-width: 960px) {
     width: 100%;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.6rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    font-size: 1.4rem;
   }
 `;
 
