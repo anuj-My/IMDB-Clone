@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AiFillStar } from "react-icons/ai";
-
 const PosterContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 99vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,6 +34,14 @@ const PosterOverlay = styled.div`
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
   transition: opacity 0.3s;
 
+  @media screen and (max-width: 760px) {
+    padding: 10rem 5rem 14rem 5rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    padding: 10rem 1rem 14rem 1rem;
+  }
+
   &:hover {
     opacity: 1;
   }
@@ -43,6 +50,14 @@ const Title = styled.div`
   font-size: 6rem;
   font-weight: 900;
   margin-bottom: 1rem;
+
+  @media screen and (max-width: 760px) {
+    font-size: 4.4rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 3.6rem;
+  }
 `;
 const Runtime = styled.div`
   font-size: 3.5rem;
@@ -51,17 +66,41 @@ const Runtime = styled.div`
   svg {
     padding-top: 1rem;
   }
+
+  @media screen and (max-width: 760px) {
+    font-size: 3rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 2.6rem;
+  }
 `;
 const Rating = styled.span`
   margin-left: 10rem;
   margin-top: 2rem;
   font-size: 3.5rem;
+
+  @media screen and (max-width: 760px) {
+    font-size: 3rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 2.6rem;
+  }
 `;
 const Description = styled.div`
   text-align: left;
   width: 50%;
   font-style: italic;
   text-align: left;
+
+  @media screen and (max-width: 1180px) {
+    width: 70%;
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
 `;
 
 const Poster = ({ movie }) => {

@@ -9,6 +9,9 @@ import MoviesList from "../components/MoviesList";
 const CustomCarousel = styled(Carousel)`
   .control-dots {
     bottom: 30px;
+    @media screen and (max-width: 560px) {
+      display: none;
+    }
   }
 `;
 

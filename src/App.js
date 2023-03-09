@@ -12,19 +12,6 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [searchList, setSearchList] = useState(null);
 
-  useEffect(() => {
-    const timerout = setTimeout(() => {
-      getMovieBySearch();
-    }, 1000);
-
-    return () => clearTimeout(timerout);
-  }, [searchInput]);
-
-  const onChangeHandler = (e) => {
-    e.preventDefault();
-    setSearchInput(e.target.value);
-  };
-
   const getMovieBySearch = async () => {
     try {
       const { data } = await axios.get(
@@ -37,9 +24,22 @@ function App() {
     }
   };
 
+  const onChangeHandler = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    getMovieBySearch();
+  };
+
   return (
     <div className="App">
-      <Header onChangeHandler={onChangeHandler} searchInput={searchInput} />
+      <Header
+        onChangeHandler={onChangeHandler}
+        submitHandler={submitHandler}
+        searchInput={searchInput}
+      />
       <Routes>
         <Route index element={<Home />} />
         <Route path="movie/:id" element={<Movie />} />

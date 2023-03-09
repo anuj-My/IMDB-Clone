@@ -1,20 +1,34 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { VscAccount } from "react-icons/vsc";
 import Search from "./Search";
 import Logo from "./Logo";
+import NavLinkList from "./NavLinkList";
+import { useRef, useState } from "react";
+import { HiMenuAlt1 } from "react-icons/hi";
 
 const HeaderContainer = styled.header`
   width: 100%;
   height: 10rem;
-  display: grid;
-  grid-template-columns: minmax(29%, 29%) minmax(59%, 59%) minmax(12%, 12%);
-  gap: 4rem;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 0 5rem;
+  padding: 0 4rem;
   position: fixed;
   z-index: 100;
   background-color: #1c1c1c;
+
+  @media screen and (max-width: 750px) {
+    height: 8rem;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 1.6rem;
+    color: white;
+  }
 `;
 
 const HeaderLeft = styled.div`
@@ -23,28 +37,67 @@ const HeaderLeft = styled.div`
   gap: 2rem;
   a {
     text-decoration: none;
-    font-size: 2rem;
+    font-size: 1.6rem;
     color: white;
   }
-`;
-const HeaderRight = styled.div``;
 
-const Header = ({ onChangeHandler }) => {
+  @media screen and (max-width: 750px) {
+    width: 20rem;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -20rem;
+    z-index: 100;
+    flex-direction: column;
+    justify-content: center;
+    background-color: cadetblue;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+`;
+
+const Btn = styled(HiMenuAlt1)`
+  position: fixed;
+  z-index: 111;
+  top: 3.5rem;
+  right: 3rem;
+  font-size: 2.5rem;
+  cursor: pointer;
+
+  @media screen and (min-width: 750px) {
+    display: none;
+  }
+
+  @media screen and (max-width: 750px) {
+    top: 2.8rem;
+  }
+
+  @media screen and (max-width: 550px) {
+    right: 1rem;
+  }
+`;
+
+const Header = ({ submitHandler, onChangeHandler }) => {
+  const [toggle, setToggle] = useState(false);
+  const menuRef = useRef();
+  const el = menuRef?.current;
+
+  if (toggle) {
+    el.style.right = `0`;
+  } else {
+    if (el) el.style.right = `-20rem`;
+  }
+
   return (
     <HeaderContainer>
-      <HeaderLeft>
-        <Link to="/">
-          <Logo />
-        </Link>
-        <Link to="movies/popular">Popular</Link>
-        <Link to="movies/top_rated">Top Rated</Link>
-        <Link to="movies/upcoming">Upcoming</Link>
+      <Link to="/">
+        <Logo />
+      </Link>
+      <HeaderLeft ref={menuRef}>
+        <NavLinkList />
       </HeaderLeft>
-      <Search onChangeHandler={onChangeHandler} />
+      <Btn onClick={() => setToggle(!toggle)} />
 
-      <HeaderRight>
-        <VscAccount style={{ fontSize: "3rem" }} />
-      </HeaderRight>
+      <Search onChangeHandler={onChangeHandler} submitHandler={submitHandler} />
     </HeaderContainer>
   );
 };
