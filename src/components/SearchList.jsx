@@ -65,7 +65,7 @@ const SearchList = () => {
         searchInput={searchInput}
       />
       <Title>Search Results For: {searchInput}</Title>
-      {searchInput === "" && <Message>Please Search a Movie</Message>}
+      {searchList === null && <Message>Please Search a Movie</Message>}
 
       {searchList && (
         <ListCards>

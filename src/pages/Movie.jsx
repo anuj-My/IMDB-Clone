@@ -341,6 +341,7 @@ const SmList = styled.div`
 `;
 
 const Movie = () => {
+  const key = process.env.REACT_APP_API_KEY;
   const [movieDetails, setMovieDetails] = useState(null);
   const [similarMovies, setSimilarMovies] = useState(null);
 
@@ -360,7 +361,7 @@ const Movie = () => {
   const getMovieDetails = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=329687fabc3ae889caf2b760dd47d231&language=en-US&append_to_response=videos`
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${key}&language=en-US&append_to_response=videos`
       );
       setMovieDetails(data);
     } catch (err) {
@@ -385,7 +386,7 @@ const Movie = () => {
   const getMovieCast = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=329687fabc3ae889caf2b760dd47d231&language=en-US`
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${key}&language=en-US`
       );
 
       setMovieCast(data.cast);
@@ -397,7 +398,7 @@ const Movie = () => {
   const getSimilarMovies = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=329687fabc3ae889caf2b760dd47d231&language=en-US&page=1`
+        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${key}&language=en-US&page=1`
       );
       setSimilarMovies(data.results);
     } catch (err) {

@@ -38,15 +38,17 @@ const ListCards = styled.div`
 `;
 
 const MoviesList = () => {
+  const key = process.env.REACT_APP_API_KEY;
   const { movieList, setMovieList } = useContext(MovieListContext);
   const { type } = useParams();
 
   const getMoviesData = async () => {
     try {
-      const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${
-        type ? type : "popular"
-      }?api_key=329687fabc3ae889caf2b760dd47d231&language=en-US
-        `);
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/movie/${
+          type ? type : "popular"
+        }?api_key=${key}&language=en-US`
+      );
 
       setMovieList(data.results);
     } catch (err) {
