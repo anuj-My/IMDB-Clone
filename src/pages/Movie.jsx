@@ -113,9 +113,17 @@ const Right = styled.div`
   }
 
   @media screen and (max-width: 860px) {
-    /* position: static; */
     left: 2rem;
     top: -55rem;
+    width: 70%;
+  }
+
+  @media screen and (max-width: 760px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 560px) {
+    width: 98%;
   }
 `;
 const DetailRightTop = styled.div`
@@ -123,21 +131,50 @@ const DetailRightTop = styled.div`
 `;
 const Name = styled.h1`
   margin-bottom: 0.6rem;
+  text-transform: capitalize;
+  letter-spacing: 1.5px;
+  @media screen and (max-width: 760px) {
+    font-size: 2.4rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 2rem;
+  }
 `;
 const Tagline = styled.div`
   margin-bottom: 0.6rem;
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.5rem;
+  }
 `;
 const Rating = styled.div`
   margin-bottom: 0.6rem;
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.5rem;
+  }
 `;
 const VoteCount = styled.span`
   margin-left: 2rem;
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.5rem;
+  }
 `;
 const Runtime = styled.div`
   margin-bottom: 0.6rem;
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.5rem;
+  }
 `;
 const ReleaseDate = styled.div`
   margin-bottom: 2rem;
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.5rem;
+  }
 `;
 const Genres = styled.div`
   display: flex;
@@ -148,32 +185,84 @@ const Genre = styled.span`
   border: 2px solid white;
   border-radius: 2rem;
   padding: 0.5rem 2rem;
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.4rem;
+    padding: 0.5rem 1.3rem;
+  }
 `;
 const DetailRightBottom = styled.div``;
-const SynopsisHeading = styled.h2``;
+const SynopsisHeading = styled.h2`
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  letter-spacing: 1.5px;
+  @media screen and (max-width: 760px) {
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.7rem;
+  }
+`;
 const SynopsisText = styled.div`
   margin-bottom: 1.5rem;
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.4rem;
+  }
 `;
 
 const Button = styled.button`
   cursor: pointer;
-  padding: 1.5rem 3rem;
+  padding: 1.4rem 2.4rem;
   font-weight: bold;
   font-size: 2rem;
   border-radius: 3rem;
+  text-transform: capitalize;
+
+  @media screen and (max-width: 760px) {
+    font-size: 1.6rem;
+    padding: 1.4rem 2rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.5rem;
+    padding: 1.2rem 1.6rem;
+  }
 `;
 
 const Casts = styled.div``;
 const CastsHeading = styled.h1`
   padding-left: 2rem;
   font-size: 3.6rem;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
+  text-transform: capitalize;
+
+  @media screen and (max-width: 760px) {
+    font-size: 3rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 2.5rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    font-size: 2rem;
+  }
 `;
 
 const Carousel = styled.div`
   height: 25rem;
   position: relative;
   margin: 2rem 0 4rem 0;
+
+  @media screen and (max-width: 760px) {
+    height: 24rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    height: 21rem;
+  }
 `;
 const CarouselBox = styled.div`
   height: 25rem;
@@ -183,6 +272,14 @@ const CarouselBox = styled.div`
   display: flex;
   align-items: center;
   scroll-behavior: smooth;
+
+  @media screen and (max-width: 760px) {
+    height: 24rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    height: 21rem;
+  }
 `;
 const Arrow = styled.a`
   color: white;
@@ -196,6 +293,16 @@ const Arrow = styled.a`
   top: 0;
   z-index: 3;
   cursor: pointer;
+
+  @media screen and (max-width: 760px) {
+    width: 3rem;
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.6rem;
+    width: 2.5rem;
+  }
 `;
 const LeftArrow = styled(Arrow)`
   position: absolute;
@@ -212,13 +319,66 @@ const MovieLinks = styled.div`
   margin-top: 3rem;
   padding: 0 2rem;
   display: flex;
-  gap: 19rem;
+  gap: 18rem;
   align-items: center;
+
+  @media screen and (max-width: 760px) {
+    gap: 5rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    gap: 4rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    gap: 1.8rem;
+  }
 `;
 const Title = styled.div`
-  font-size: 3rem;
+  font-size: 2.7rem;
+
+  @media screen and (max-width: 760px) {
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.6rem;
+  }
 `;
 const LinkContainer = styled.div``;
+
+const HomepageLink = styled.a`
+  color: white;
+  background-color: red;
+  padding: 1.4rem 2.4rem;
+  border-radius: 3rem;
+  text-decoration: none;
+  font-weight: bold;
+
+  :not(:last-child) {
+    margin-right: 2rem;
+  }
+
+  @media screen and (max-width: 760px) {
+    padding: 1.4rem 2rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    padding: 1.2rem 1.6rem;
+    font-size: 1.4rem;
+
+    :not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 380px) {
+    padding: 1.2rem 1.4rem;
+  }
+`;
+const ImdbLink = styled(HomepageLink)`
+  background-color: #e6b91e;
+`;
 
 const ProdCompanies = styled.div`
   margin-top: 7rem;
@@ -226,13 +386,26 @@ const ProdCompanies = styled.div`
   place-items: center;
   background-color: #e6e6e6;
   width: 100%;
-  padding: 3rem 0;
+  padding: 3rem;
 `;
 const ProdTitle = styled.div`
   font-size: 4rem;
   color: black;
   font-weight: 500;
   margin-bottom: 4.5rem;
+  text-transform: capitalize;
+
+  @media screen and (max-width: 760px) {
+    font-size: 3rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 2.3rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    font-size: 2rem;
+  }
 `;
 const Companies = styled.div`
   display: flex;
@@ -243,7 +416,19 @@ const Companies = styled.div`
 `;
 
 const CompanyContainer = styled.div`
-  width: 23rem;
+  width: 20rem;
+
+  @media screen and (max-width: 760px) {
+    width: 14rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    width: 9rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    width: 7rem;
+  }
 `;
 
 const CompanyLogo = styled.img`
@@ -256,22 +441,6 @@ const CompanyName = styled.span`
   padding: 2rem 3rem;
   color: white;
   background-color: black;
-`;
-
-const HomepageLink = styled.a`
-  color: white;
-  background-color: red;
-  padding: 1.5rem 3rem;
-  border-radius: 3rem;
-  text-decoration: none;
-  font-weight: bold;
-
-  :not(:last-child) {
-    margin-right: 2rem;
-  }
-`;
-const ImdbLink = styled(HomepageLink)`
-  background-color: #e6b91e;
 `;
 
 const SimilarMovieList = styled.div`
@@ -400,7 +569,6 @@ const Movie = () => {
                     <AiFillStar />
                     <VoteCount>({movieDetails.vote_count}) votes</VoteCount>
                   </Rating>
-
                   <Runtime>{movieDetails.runtime} mins</Runtime>
                   <ReleaseDate>
                     Release Date: {movieDetails.release_date}

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import Search from "./Search";
 import Logo from "./Logo";
 import NavLinkList from "./NavLinkList";
 import { useRef, useState } from "react";

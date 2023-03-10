@@ -16,6 +16,14 @@ const Title = styled.h2`
   font-weight: 500;
   text-align: center;
   margin-top: 3rem;
+
+  @media screen and (max-width: 760px) {
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.6rem;
+  }
 `;
 const ListCards = styled.div`
   display: grid;
@@ -32,6 +40,18 @@ const Message = styled.p`
   height: 55vh;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 760px) {
+    font-size: 2.7rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    font-size: 1.6rem;
+  }
 `;
 
 const SearchList = () => {

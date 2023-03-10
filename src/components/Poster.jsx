@@ -4,10 +4,14 @@ import { AiFillStar } from "react-icons/ai";
 const PosterContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 70vh;
+  height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 760px) {
+    height: 67vh;
+  }
 `;
 const PosterImage = styled.div`
   width: 100%;
@@ -25,7 +29,7 @@ const PosterOverlay = styled.div`
   position: absolute;
   padding: 10rem;
   bottom: 0px;
-  height: 70vh;
+  height: 85vh;
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
@@ -36,6 +40,7 @@ const PosterOverlay = styled.div`
 
   @media screen and (max-width: 760px) {
     padding: 10rem 5rem;
+    height: 67vh;
   }
 
   @media screen and (max-width: 560px) {
@@ -83,6 +88,7 @@ const Runtime = styled.div`
     font-size: 1.6rem;
   }
 `;
+
 const Rating = styled.span`
   margin-left: 10rem;
   margin-top: 2rem;
@@ -127,26 +133,24 @@ const Poster = ({ movie }) => {
   return (
     <Link
       style={{ fontSize: "1.6rem", color: "white" }}
-      to={`movie/${movie.id}`}
+      to={`movie/${movie?.id}`}
     >
       <PosterContainer>
         <PosterImage>
           <Image
-            src={`https://image.tmdb.org/t/p/original${
-              movie && movie.backdrop_path
-            }`}
+            src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
           />
         </PosterImage>
 
         <PosterOverlay>
-          <Title>{movie && movie.original_title}</Title>
+          <Title>{movie?.original_title}</Title>
 
           <Runtime>
-            {movie && movie.release_date}
-            <Rating>{movie && movie.vote_average}</Rating>
+            {movie?.release_date}
+            <Rating>{movie?.vote_average}</Rating>
             <AiFillStar />
           </Runtime>
-          <Description>{movie ? movie.overview : ""}</Description>
+          <Description>{movie?.overview}</Description>
         </PosterOverlay>
       </PosterContainer>
     </Link>

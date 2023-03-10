@@ -10,6 +10,14 @@ const FooterContainer = styled.footer`
   justify-content: center;
   align-items: center;
   margin-top: 4rem;
+
+  @media screen and (max-width: 760px) {
+    height: 8rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    height: 7rem;
+  }
 `;
 
 const Footer = () => {

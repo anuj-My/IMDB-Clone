@@ -14,13 +14,12 @@ const Overlay = styled.div`
   position: absolute;
   top: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  height: 30rem;
-  padding: 10rem 1rem 1rem 1rem;
+  padding: 14rem 1rem 1rem 1rem;
+  height: 100%;
 `;
 
 const CardContainer = styled.div`
-  height: 30rem;
-  width: 20rem;
+  width: 100%;
   position: relative;
   transition: all 0.3s ease;
 
@@ -37,9 +36,24 @@ const CardContainer = styled.div`
 
 const Title = styled.div`
   font-size: 2rem;
+
+  @media screen and (max-width: 760px) {
+    font-size: 1.6rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.5rem;
+  }
 `;
 const Runtime = styled.div`
   margin: 0.5rem 0 0.3rem 0;
+  @media screen and (max-width: 760px) {
+    font-size: 1.5rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.4rem;
+  }
 `;
 const Rating = styled.span`
   margin-left: 3rem;
@@ -62,7 +76,7 @@ const Card = ({ movie }) => {
       {isLoading ? (
         <CardContainer>
           <SkeletonTheme color="#202020" highlightColor="#444">
-            <Skeleton height={300} duration={2} />
+            <Skeleton height={330} duration={2} />
           </SkeletonTheme>
         </CardContainer>
       ) : (
@@ -72,22 +86,18 @@ const Card = ({ movie }) => {
         >
           <CardContainer>
             <Image
-              src={`https://image.tmdb.org/t/p/original${
-                movie && movie.poster_path
-              }`}
+              src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
             />
             <Overlay>
-              <Title>{movie ? movie.original_title : ""}</Title>
+              <Title>{movie?.original_title}</Title>
               <Runtime>
-                {movie ? movie.release_date : ""}
+                {movie?.release_date}
                 <Rating>
-                  {movie ? movie.vote_average : ""}
+                  {movie?.vote_average}
                   <AiFillStar />
                 </Rating>
               </Runtime>
-              <Description>
-                {movie ? movie.overview.slice(0, 118) + "..." : ""}
-              </Description>
+              <Description>{movie?.overview.slice(0, 118) + "..."}</Description>
             </Overlay>
           </CardContainer>
         </Link>
