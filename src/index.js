@@ -6,6 +6,7 @@ import "./index.css";
 import App from "./App";
 import CastProvider from "./context/CastProvider";
 import TrailerProvider from "./context/TrailerProvider";
+import MovieListProvider from "./context/MovieListProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -15,7 +16,10 @@ root.render(
       <SearchProvider>
         <CastProvider>
           <TrailerProvider>
+            <MovieListProvider>
+
             <App />
+            </MovieListProvider>
           </TrailerProvider>
         </CastProvider>
       </SearchProvider>

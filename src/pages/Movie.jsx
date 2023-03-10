@@ -354,6 +354,7 @@ const Movie = () => {
     getSimilarMovies();
     getMovieCast();
     window.scrollTo(0, 0);
+    // eslint-disable-next-line
   }, [id]);
 
   const getMovieDetails = async () => {

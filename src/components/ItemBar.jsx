@@ -56,6 +56,7 @@ const CompanyLogo = styled.img`
 `;
 
 const CompanyName = styled.span`
+  display: inline-block;
   font-size: 1.4rem;
   border-radius: 3rem;
   padding: 2rem 3rem;
@@ -64,10 +65,6 @@ const CompanyName = styled.span`
 
   @media screen and (max-width: 760px) {
     padding: 1.4rem 2rem;
-  }
-
-  @media screen and (max-width: 560px) {
-    padding: 1.2rem 1.6rem;
   }
 `;
 

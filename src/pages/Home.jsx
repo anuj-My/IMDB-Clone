@@ -5,7 +5,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import Poster from "../components/Poster";
 import MoviesList from "../components/MoviesList";
-import MovieListContainer from "../container/MovieListContainer";
 
 const CustomCarousel = styled(Carousel)`
   .control-dots {
@@ -50,7 +49,7 @@ const Home = () => {
         {PopularMoviesList}
       </CustomCarousel>
 
-      <MovieListContainer />
+      <MoviesList />
     </>
   );
 };
