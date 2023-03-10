@@ -15,6 +15,14 @@ const CustomCarousel = styled(Carousel)`
   }
 `;
 
+const Wrapper = styled.div`
+  margin-top: 12rem;
+
+  @media screen and (max-width: 760px) {
+    margin-top: 5rem;
+  }
+`;
+
 const Home = () => {
   const [popularMovies, setPopularMoviesData] = useState([]);
   const getPopularMovies = async () => {
@@ -49,7 +57,9 @@ const Home = () => {
         {PopularMoviesList}
       </CustomCarousel>
 
-      <MoviesList />
+      <Wrapper>
+        <MoviesList />
+      </Wrapper>
     </>
   );
 };
