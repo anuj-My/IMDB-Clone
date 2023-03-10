@@ -1,23 +1,26 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import YouTube from "react-youtube";
 import Card from "../components/Card";
-import ImageInfoCard from "../components/ImageInfoCard";
 import { AiFillStar } from "react-icons/ai";
 import { IoMdCloseCircle } from "react-icons/io";
-import { MdArrowBackIosNew } from "react-icons/md";
-import { MdArrowForwardIos } from "react-icons/md";
+import { CastContext } from "../context/CastProvider";
+import Cast from "../components/Cast";
+import ItemBar from "../components/ItemBar";
+import { TrailerContext } from "../context/TrailerProvider";
 
 const MovieDetailPage = styled.div`
   position: relative;
+  min-height: 100vh;
 `;
 
 const VideoPopup = styled.div`
   ${({ playTrailer }) =>
     playTrailer && {
       position: "absolute",
+      top: 0,
       zIndex: "5000",
       width: "100%",
       height: "100vh",
@@ -26,6 +29,26 @@ const VideoPopup = styled.div`
       alignItems: "center",
       backgroundColor: " rgb(15, 15, 15)",
     }}
+
+  div iframe {
+    width: 64rem !important;
+    height: 36rem !important;
+
+    @media screen and (max-width: 760px) {
+      width: 48rem !important;
+      height: 30rem !important;
+    }
+
+    @media screen and (max-width: 560px) {
+      width: 34rem !important;
+      height: 24rem !important;
+    }
+
+    @media screen and (max-width: 380px) {
+      width: 26rem !important;
+      height: 20rem !important;
+    }
+  }
 `;
 const Cross = styled.div`
   cursor: pointer;
@@ -231,90 +254,6 @@ const Button = styled.button`
   }
 `;
 
-const Casts = styled.div``;
-const CastsHeading = styled.h1`
-  padding-left: 2rem;
-  font-size: 3.6rem;
-  letter-spacing: 1.5px;
-  text-transform: capitalize;
-
-  @media screen and (max-width: 760px) {
-    font-size: 3rem;
-  }
-
-  @media screen and (max-width: 560px) {
-    font-size: 2.5rem;
-  }
-
-  @media screen and (max-width: 380px) {
-    font-size: 2rem;
-  }
-`;
-
-const Carousel = styled.div`
-  height: 25rem;
-  position: relative;
-  margin: 2rem 0 4rem 0;
-
-  @media screen and (max-width: 760px) {
-    height: 24rem;
-  }
-
-  @media screen and (max-width: 560px) {
-    height: 21rem;
-  }
-`;
-const CarouselBox = styled.div`
-  height: 25rem;
-  overflow: hidden;
-  text-align: center;
-  padding-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  scroll-behavior: smooth;
-
-  @media screen and (max-width: 760px) {
-    height: 24rem;
-  }
-
-  @media screen and (max-width: 560px) {
-    height: 21rem;
-  }
-`;
-const Arrow = styled.a`
-  color: white;
-  font-weight: bold;
-  height: 100%;
-  width: 4.5rem;
-  line-height: 25rem;
-  font-size: 2.5rem;
-  text-align: center;
-  background-color: #1818189f;
-  top: 0;
-  z-index: 3;
-  cursor: pointer;
-
-  @media screen and (max-width: 760px) {
-    width: 3rem;
-    font-size: 2rem;
-  }
-
-  @media screen and (max-width: 560px) {
-    font-size: 1.6rem;
-    width: 2.5rem;
-  }
-`;
-const LeftArrow = styled(Arrow)`
-  position: absolute;
-  left: 0rem;
-  display: ${({ movieCast }) => movieCast.length < 6 && "none"};
-`;
-const RightArrow = styled(Arrow)`
-  display: ${({ movieCast }) => movieCast.length < 6 && "none"};
-  position: absolute;
-  right: 0rem;
-`;
-
 const MovieLinks = styled.div`
   margin-top: 3rem;
   padding: 0 2rem;
@@ -380,73 +319,14 @@ const ImdbLink = styled(HomepageLink)`
   background-color: #e6b91e;
 `;
 
-const ProdCompanies = styled.div`
-  margin-top: 7rem;
-  display: grid;
-  place-items: center;
-  background-color: #e6e6e6;
-  width: 100%;
-  padding: 3rem;
-`;
-const ProdTitle = styled.div`
-  font-size: 4rem;
-  color: black;
-  font-weight: 500;
-  margin-bottom: 4.5rem;
-  text-transform: capitalize;
-
-  @media screen and (max-width: 760px) {
-    font-size: 3rem;
-  }
-
-  @media screen and (max-width: 560px) {
-    font-size: 2.3rem;
-  }
-
-  @media screen and (max-width: 380px) {
-    font-size: 2rem;
-  }
-`;
-const Companies = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3rem;
-  align-items: center;
-  justify-content: center;
-`;
-
-const CompanyContainer = styled.div`
-  width: 20rem;
-
-  @media screen and (max-width: 760px) {
-    width: 14rem;
-  }
-
-  @media screen and (max-width: 560px) {
-    width: 9rem;
-  }
-
-  @media screen and (max-width: 380px) {
-    width: 7rem;
-  }
-`;
-
-const CompanyLogo = styled.img`
-  width: 100%;
-`;
-
-const CompanyName = styled.span`
-  font-size: 1.4rem;
-  border-radius: 3rem;
-  padding: 2rem 3rem;
-  color: white;
-  background-color: black;
-`;
-
 const SimilarMovieList = styled.div`
   width: 83%;
   padding-top: 5rem;
   margin: auto;
+
+  @media screen and (max-width: 820px) {
+    width: 98%;
+  }
 `;
 const SimilarMovieHead = styled.h1`
   margin-bottom: 2rem;
@@ -455,37 +335,26 @@ const SimilarMovieHead = styled.h1`
 const SmList = styled.div`
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fill, 20rem);
+  grid-template-columns: repeat(auto-fill, 22rem);
   grid-template-rows: masonry;
   justify-content: center;
 `;
 
 const Movie = () => {
-  const boxref = useRef();
   const [movieDetails, setMovieDetails] = useState(null);
   const [similarMovies, setSimilarMovies] = useState(null);
-  const [movieCast, setMovieCast] = useState([]);
-  const [playTrailer, setPlayTrailer] = useState(false);
+
   const { id } = useParams();
+
+  const { movieCast, setMovieCast } = useContext(CastContext);
+  const { playTrailer, setPlayTrailer } = useContext(TrailerContext);
+
   useEffect(() => {
     getMovieDetails();
     getSimilarMovies();
     getMovieCast();
     window.scrollTo(0, 0);
   }, [id]);
-
-  // ======slider======
-  const onClickHandler = (direction) => {
-    const container = boxref.current;
-    const card = boxref.current.firstElementChild;
-
-    if (direction === "left") {
-      container.scrollLeft = container.scrollLeft - card.clientWidth + 6;
-    }
-    if (direction === "right") {
-      container.scrollLeft = container.scrollLeft + card.clientWidth + 6;
-    }
-  };
 
   const getMovieDetails = async () => {
     try {
@@ -540,6 +409,7 @@ const Movie = () => {
       <MovieDetailPage key={id}>
         <VideoPopup playTrailer={playTrailer}>
           {movieDetails.videos && playTrailer ? renderTrailer() : null}
+
           <Cross onClick={() => setPlayTrailer(false)}>
             <IoMdCloseCircle />
           </Cross>
@@ -590,31 +460,9 @@ const Movie = () => {
                 </DetailRightBottom>
               </Right>
             </MovieDetailContainer>
-            <Casts>
-              <CastsHeading>Casts</CastsHeading>
-              <Carousel>
-                {movieCast && (
-                  <CarouselBox ref={boxref}>
-                    {movieCast.map((cast) => {
-                      return <ImageInfoCard cast={cast} key={cast.id} />;
-                    })}
-                  </CarouselBox>
-                )}
+            {/* cast ---------- */}
 
-                <LeftArrow
-                  movieCast={movieCast}
-                  onClick={() => onClickHandler("left")}
-                >
-                  <MdArrowBackIosNew />
-                </LeftArrow>
-                <RightArrow
-                  movieCast={movieCast}
-                  onClick={() => onClickHandler("right")}
-                >
-                  <MdArrowForwardIos />
-                </RightArrow>
-              </Carousel>
-            </Casts>
+            <Cast movieCast={movieCast} />
 
             <MovieLinks>
               <Title>Useful Links</Title>
@@ -635,34 +483,8 @@ const Movie = () => {
               </LinkContainer>
             </MovieLinks>
           </MovieInfoWrapper>
-          {movieDetails.production_companies && (
-            <ProdCompanies>
-              <ProdTitle>Production Companies</ProdTitle>
-              <Companies>
-                {movieDetails.production_companies.length ? (
-                  movieDetails.production_companies.map((company) => {
-                    return (
-                      <CompanyContainer key={company.id}>
-                        {company.logo_path ? (
-                          <CompanyLogo
-                            src={`https://image.tmdb.org/t/p/w500${company.logo_path}`}
-                          />
-                        ) : (
-                          <CompanyName key={company.id}>
-                            {company.name}
-                          </CompanyName>
-                        )}
-                      </CompanyContainer>
-                    );
-                  })
-                ) : (
-                  <span style={{ color: "black" }}>
-                    No companies are mentioned.
-                  </span>
-                )}
-              </Companies>
-            </ProdCompanies>
-          )}
+
+          <ItemBar items={movieDetails.production_companies} />
 
           <SimilarMovieList>
             <SimilarMovieHead>Similar Movies:</SimilarMovieHead>

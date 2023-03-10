@@ -23,13 +23,21 @@ const CardContainer = styled.div`
   position: relative;
   transition: all 0.3s ease;
 
-  a > &:hover {
-    transform: scale(1.2);
-    z-index: 999;
+  @media (hover: hover) {
+    a > &:hover {
+      transform: scale(1.2);
+      z-index: 999;
 
+      ${Overlay} {
+        display: block;
+        z-index: 1000;
+      }
+    }
+  }
+
+  @media (hover: none) {
     ${Overlay} {
       display: block;
-      z-index: 1000;
     }
   }
 `;

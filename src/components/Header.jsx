@@ -13,6 +13,7 @@ const HeaderContainer = styled.header`
   align-items: center;
   padding: 0 4rem;
   position: fixed;
+  top: 0;
   z-index: 100;
   background-color: #1c1c1c;
 
