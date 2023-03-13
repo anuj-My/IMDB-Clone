@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import NavLinkList from "./NavLinkList";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { HiMenuAlt1 } from "react-icons/hi";
 
 const HeaderContainer = styled.header`
@@ -15,10 +15,13 @@ const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
   z-index: 100;
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
   background-color: #1c1c1c;
+  transform: translateY(${({ scroll }) => (scroll ? 0 : -10)}rem);
 
   @media screen and (max-width: 750px) {
     height: 8rem;
+    transform: translateY(${({ scroll }) => (scroll ? 0 : -8)}rem);
     justify-content: flex-start;
     gap: 1rem;
     padding: 0 1rem;
@@ -78,8 +81,28 @@ const Btn = styled(HiMenuAlt1)`
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);
+  const [onScroll, setOnScroll] = useState(true);
   const menuRef = useRef();
   const el = menuRef?.current;
+
+  let lastScrollY = window.scrollY;
+
+  const controlNavbar = () => {
+    if (window.scrollY > lastScrollY) {
+      setOnScroll(false);
+    } else {
+      setOnScroll(true);
+    }
+    lastScrollY = window.scrollY;
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", controlNavbar);
+
+    return () => {
+      window.removeEventListener("scroll", controlNavbar);
+    };
+  });
 
   if (toggle) {
     el.style.right = `0`;
@@ -88,7 +111,7 @@ const Header = () => {
   }
 
   return (
-    <HeaderContainer>
+    <HeaderContainer scroll={onScroll}>
       <Link to="/">
         <Logo />
       </Link>
