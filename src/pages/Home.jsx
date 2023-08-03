@@ -51,7 +51,6 @@ const Home = () => {
     <>
       <CustomCarousel
         autoPlay={true}
-        // showIndicators={false}
         transitionTime={3}
         infiniteLoop={true}
         showThumbs={false}

@@ -7,15 +7,18 @@ import { AiFillStar } from "react-icons/ai";
 const Image = styled.img`
   width: 100%;
   height: 100%;
+  border-radius: 1.5rem;
 `;
 
 const Overlay = styled.div`
   display: none;
   position: absolute;
-  top: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 14rem 1rem 1rem 1rem;
+  border-radius: 1.5rem;
+  padding: 1rem;
   height: 100%;
+  width: 100%;
 `;
 
 const CardContainer = styled.div`
@@ -25,7 +28,7 @@ const CardContainer = styled.div`
 
   @media (hover: hover) {
     a > &:hover {
-      transform: scale(1.2);
+      transform: scale(1.15);
       z-index: 999;
 
       ${Overlay} {
@@ -66,9 +69,6 @@ const Runtime = styled.div`
 const Rating = styled.span`
   margin-left: 3rem;
 `;
-const Description = styled.div`
-  font-size: 1.4rem;
-`;
 
 const Card = ({ movie }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -76,21 +76,29 @@ const Card = ({ movie }) => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 2500);
   }, []);
 
   return (
     <>
       {isLoading ? (
         <CardContainer>
-          <SkeletonTheme color="#202020" highlightColor="#444">
-            <Skeleton height={330} duration={2} />
+          <SkeletonTheme baseColor="#121212" highlightColor="#1f1f1f">
+            <Skeleton
+              height={330}
+              duration={2}
+              style={{ borderRadius: "1.5rem" }}
+            />
           </SkeletonTheme>
         </CardContainer>
       ) : (
         <Link
           to={`/movie/${movie.id}`}
-          style={{ textDecoration: "none", color: "white", width: "none" }}
+          style={{
+            textDecoration: "none",
+            color: "white",
+            width: "none",
+          }}
         >
           <CardContainer>
             <Image
@@ -105,7 +113,6 @@ const Card = ({ movie }) => {
                   <AiFillStar />
                 </Rating>
               </Runtime>
-              <Description>{movie?.overview.slice(0, 118) + "..."}</Description>
             </Overlay>
           </CardContainer>
         </Link>

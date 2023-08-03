@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import styled from "styled-components";
-import { TrailerContext } from "../context/TrailerProvider";
 import Logo from "./Logo";
 
 const FooterContainer = styled.footer`
@@ -23,14 +21,10 @@ const FooterContainer = styled.footer`
 `;
 
 const Footer = () => {
-  const { playTrailer } = useContext(TrailerContext);
-
   return (
-    playTrailer || (
-      <FooterContainer>
-        <Logo />
-      </FooterContainer>
-    )
+    <FooterContainer>
+      <Logo />
+    </FooterContainer>
   );
 };
 

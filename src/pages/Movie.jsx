@@ -1,11 +1,14 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import YouTube from "react-youtube";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import YouTube from "react-youtube";
-import Card from "../components/Card";
 import { AiFillStar } from "react-icons/ai";
+import { BiLinkExternal } from "react-icons/bi";
+import { HashLoader } from "react-spinners";
+
 import { CastContext } from "../context/CastProvider";
+import Card from "../components/Card";
 import Cast from "../components/Cast";
 import ItemBar from "../components/ItemBar";
 
@@ -70,12 +73,14 @@ const PosterContainer = styled.div`
   position: absolute;
   bottom: -19rem;
   left: 4rem;
+  border-radius: 1.5rem;
 
   @media screen and (max-width: 860px) {
     display: none;
   }
 `;
 const PosterImage = styled.img`
+  border-radius: 1.5rem;
   width: 100%;
   height: 100%;
 `;
@@ -213,6 +218,8 @@ const TrailerHeading = styled.h1`
 `;
 
 const LinkContainer = styled.div`
+  display: flex;
+  gap: 1.8rem;
   margin-top: 4rem;
 `;
 
@@ -220,13 +227,12 @@ const HomepageLink = styled.a`
   color: white;
   background-color: red;
   padding: 1.4rem 2.4rem;
-  border-radius: 3rem;
+  border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
-
-  :not(:last-child) {
-    margin-right: 2rem;
-  }
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 
   @media screen and (max-width: 760px) {
     padding: 1.4rem 2rem;
@@ -235,10 +241,6 @@ const HomepageLink = styled.a`
   @media screen and (max-width: 560px) {
     padding: 1.2rem 1.6rem;
     font-size: 1.4rem;
-
-    :not(:last-child) {
-      margin-right: 1rem;
-    }
   }
 
   @media screen and (max-width: 380px) {
@@ -275,8 +277,6 @@ const Movie = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const [similarMovies, setSimilarMovies] = useState(null);
 
-  console.log(movieDetails);
-
   const { id } = useParams();
 
   const { movieCast, setMovieCast } = useContext(CastContext);
@@ -304,7 +304,6 @@ const Movie = () => {
     (video) => video.name === "Official Trailer" || video.site === "YouTube"
   );
   const renderTrailer = () => {
-    console.log(trailer);
     const opts = {
       height: "460",
       width: "100%",
@@ -341,102 +340,120 @@ const Movie = () => {
     }
   };
 
-  return (
-    movieDetails && (
-      <MovieDetailPage key={id}>
-        <MovieContainer>
-          <MovieInfoWrapper>
-            <MovieBackground>
-              <BackgroundImage
-                src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`}
-              />
-            </MovieBackground>
+  return movieDetails ? (
+    <MovieDetailPage key={id}>
+      <MovieContainer>
+        <MovieInfoWrapper>
+          <MovieBackground>
+            <BackgroundImage
+              src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`}
+            />
+          </MovieBackground>
 
-            <MovieDetailContainer>
-              <Left>
-                <PosterContainer>
-                  <PosterImage
-                    src={`https://image.tmdb.org/t/p/original${movieDetails.poster_path}`}
-                  ></PosterImage>
-                </PosterContainer>
-              </Left>
-              <Right>
-                <DetailRightTop>
-                  <Name>{movieDetails.title}</Name>
-                  <Tagline>{movieDetails.tagline}</Tagline>
-                  <Rating>
-                    {Number(movieDetails.vote_average).toFixed(1)}
-                    <AiFillStar />
-                    <VoteCount>({movieDetails.vote_count}) votes</VoteCount>
-                  </Rating>
-                  <Runtime>{movieDetails.runtime} mins</Runtime>
-                  <ReleaseDate>
-                    Release Date: {movieDetails.release_date}
-                  </ReleaseDate>
-                  <Genres>
-                    {movieDetails.genres &&
-                      movieDetails.genres.map((genre) => {
-                        return <Genre key={genre.id}>{genre.name}</Genre>;
-                      })}
-                  </Genres>
-                </DetailRightTop>
+          <MovieDetailContainer>
+            <Left>
+              <PosterContainer>
+                <PosterImage
+                  src={`https://image.tmdb.org/t/p/original${movieDetails.poster_path}`}
+                ></PosterImage>
+              </PosterContainer>
+            </Left>
+            <Right>
+              <DetailRightTop>
+                <Name>{movieDetails.title}</Name>
+                <Tagline>{movieDetails.tagline}</Tagline>
+                <Rating>
+                  {Number(movieDetails.vote_average).toFixed(1)}
+                  <AiFillStar />
+                  <VoteCount>({movieDetails.vote_count}) votes</VoteCount>
+                </Rating>
+                <Runtime>{movieDetails.runtime} mins</Runtime>
+                <ReleaseDate>
+                  Release Date: {movieDetails.release_date}
+                </ReleaseDate>
+                <Genres>
+                  {movieDetails.genres &&
+                    movieDetails.genres.map((genre) => {
+                      return <Genre key={genre.id}>{genre.name}</Genre>;
+                    })}
+                </Genres>
+              </DetailRightTop>
 
-                <DetailRightBottom>
-                  <SynopsisHeading>Synopsis</SynopsisHeading>
-                  <SynopsisText>{movieDetails.overview}</SynopsisText>
-                </DetailRightBottom>
+              <DetailRightBottom>
+                <SynopsisHeading>Synopsis</SynopsisHeading>
+                <SynopsisText>{movieDetails.overview}</SynopsisText>
+              </DetailRightBottom>
 
-                <LinkContainer>
-                  {movieDetails.homepage && (
-                    <HomepageLink href={movieDetails.homepage} target="_blank">
-                      Homepage
-                    </HomepageLink>
-                  )}
-                  {movieDetails.imdb_id && (
-                    <ImdbLink
-                      href={`https://www.imdb.com/title/${movieDetails.imdb_id}`}
-                      target="_blank"
-                    >
-                      IMDB
-                    </ImdbLink>
-                  )}
-                </LinkContainer>
-              </Right>
-            </MovieDetailContainer>
-            {/* cast ---------- */}
-            <TrailerContainer>
-              <TrailerHeading>{trailer.name}</TrailerHeading>
-              {movieDetails.videos ? renderTrailer() : null}
-            </TrailerContainer>
+              <LinkContainer>
+                {movieDetails.homepage && (
+                  <HomepageLink href={movieDetails.homepage} target="_blank">
+                    Homepage
+                    <BiLinkExternal size={20} />
+                  </HomepageLink>
+                )}
+                {movieDetails.imdb_id && (
+                  <ImdbLink
+                    href={`https://www.imdb.com/title/${movieDetails.imdb_id}`}
+                    target="_blank"
+                  >
+                    IMDB
+                    <BiLinkExternal size={20} />
+                  </ImdbLink>
+                )}
+              </LinkContainer>
+            </Right>
+          </MovieDetailContainer>
+          {/* cast ---------- */}
+          <TrailerContainer>
+            <TrailerHeading>{trailer.name}</TrailerHeading>
 
-            <Cast movieCast={movieCast} />
-          </MovieInfoWrapper>
+            {movieDetails.videos ? renderTrailer() : null}
+          </TrailerContainer>
 
-          <ItemBar items={movieDetails.production_companies} />
+          <Cast movieCast={movieCast} />
+        </MovieInfoWrapper>
 
-          <SimilarMovieList>
-            <SimilarMovieHead>Similar Movies:</SimilarMovieHead>
-            <SmList>
-              {similarMovies && similarMovies.length ? (
-                similarMovies.map((movie) => {
-                  return <Card movie={movie} key={movie.id} />;
-                })
-              ) : (
-                <span
-                  style={{
-                    color: "white",
-                    gridColumn: "1 / 7",
-                    fontSize: "2rem",
-                  }}
-                >
-                  There are no similar movie related to {movieDetails.title}
-                </span>
-              )}
-            </SmList>
-          </SimilarMovieList>
-        </MovieContainer>
-      </MovieDetailPage>
-    )
+        <ItemBar items={movieDetails.production_companies} />
+
+        <SimilarMovieList>
+          <SimilarMovieHead>Similar Movies:</SimilarMovieHead>
+          <SmList>
+            {similarMovies && similarMovies.length ? (
+              similarMovies.map((movie) => {
+                return <Card movie={movie} key={movie.id} />;
+              })
+            ) : (
+              <span
+                style={{
+                  color: "white",
+                  gridColumn: "1 / 7",
+                  fontSize: "2rem",
+                }}
+              >
+                There are no similar movie related to {movieDetails.title}
+              </span>
+            )}
+          </SmList>
+        </SimilarMovieList>
+      </MovieContainer>
+    </MovieDetailPage>
+  ) : (
+    <div
+      style={{
+        width: "100%",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <HashLoader
+        color="#dc0000"
+        size={50}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </div>
   );
 };
 
