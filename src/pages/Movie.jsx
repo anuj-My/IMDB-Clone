@@ -235,6 +235,29 @@ const SynopsisText = styled.div`
   }
 `;
 
+const TrailerContainer = styled.div`
+  margin-top: 7rem;
+`;
+
+const TrailerHeading = styled.h1`
+  padding-left: 2rem;
+  font-size: 3.6rem;
+  letter-spacing: 1.5px;
+  text-transform: capitalize;
+
+  @media screen and (max-width: 760px) {
+    font-size: 3rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 2.5rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    font-size: 2rem;
+  }
+`;
+
 const Button = styled.button`
   cursor: pointer;
   padding: 1.4rem 2.4rem;
@@ -284,7 +307,9 @@ const Title = styled.div`
     font-size: 1.6rem;
   }
 `;
-const LinkContainer = styled.div``;
+const LinkContainer = styled.div`
+  margin-top: 4rem;
+`;
 
 const HomepageLink = styled.a`
   color: white;
@@ -345,6 +370,8 @@ const Movie = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const [similarMovies, setSimilarMovies] = useState(null);
 
+  console.log(movieDetails);
+
   const { id } = useParams();
 
   const { movieCast, setMovieCast } = useContext(CastContext);
@@ -369,18 +396,22 @@ const Movie = () => {
     }
   };
 
+  const trailer = movieDetails.videos.results.find(
+    (video) => video.name === "Official Trailer" || video.site === "YouTube"
+  );
   const renderTrailer = () => {
-    const trailer = movieDetails.videos.results.find(
-      (video) => video.name === "Official Trailer"
-    );
-
+    console.log(trailer);
     const opts = {
-      playerVars: {
-        autoplay: 1,
-      },
+      height: "460",
+      width: "100%",
     };
-
-    return <YouTube videoId={trailer.key} opts={opts} />;
+    return (
+      <YouTube
+        videoId={trailer?.key}
+        opts={opts}
+        style={{ margin: "5rem 0" }}
+      />
+    );
   };
 
   const getMovieCast = async () => {
@@ -409,13 +440,6 @@ const Movie = () => {
   return (
     movieDetails && (
       <MovieDetailPage key={id}>
-        <VideoPopup playTrailer={playTrailer}>
-          {movieDetails.videos && playTrailer ? renderTrailer() : null}
-
-          <Cross onClick={() => setPlayTrailer(false)}>
-            <IoMdCloseCircle />
-          </Cross>
-        </VideoPopup>
         <MovieContainer playTrailer={playTrailer}>
           <MovieInfoWrapper>
             <MovieBackground>
@@ -456,34 +480,32 @@ const Movie = () => {
                 <DetailRightBottom>
                   <SynopsisHeading>Synopsis</SynopsisHeading>
                   <SynopsisText>{movieDetails.overview}</SynopsisText>
-                  <Button onClick={() => setPlayTrailer(true)}>
-                    Watch Trailer
-                  </Button>
                 </DetailRightBottom>
+
+                <LinkContainer>
+                  {movieDetails.homepage && (
+                    <HomepageLink href={movieDetails.homepage} target="_blank">
+                      Homepage
+                    </HomepageLink>
+                  )}
+                  {movieDetails.imdb_id && (
+                    <ImdbLink
+                      href={`https://www.imdb.com/title/${movieDetails.imdb_id}`}
+                      target="_blank"
+                    >
+                      IMDB
+                    </ImdbLink>
+                  )}
+                </LinkContainer>
               </Right>
             </MovieDetailContainer>
             {/* cast ---------- */}
+            <TrailerContainer>
+              <TrailerHeading>{trailer.name}</TrailerHeading>
+              {movieDetails.videos ? renderTrailer() : null}
+            </TrailerContainer>
 
             <Cast movieCast={movieCast} />
-
-            <MovieLinks>
-              <Title>Useful Links</Title>
-              <LinkContainer>
-                {movieDetails.homepage && (
-                  <HomepageLink href={movieDetails.homepage} target="_blank">
-                    Homepage
-                  </HomepageLink>
-                )}
-                {movieDetails.imdb_id && (
-                  <ImdbLink
-                    href={`https://www.imdb.com/title/${movieDetails.imdb_id}`}
-                    target="_blank"
-                  >
-                    IMDB
-                  </ImdbLink>
-                )}
-              </LinkContainer>
-            </MovieLinks>
           </MovieInfoWrapper>
 
           <ItemBar items={movieDetails.production_companies} />
