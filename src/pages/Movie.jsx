@@ -5,59 +5,13 @@ import { useParams } from "react-router-dom";
 import YouTube from "react-youtube";
 import Card from "../components/Card";
 import { AiFillStar } from "react-icons/ai";
-import { IoMdCloseCircle } from "react-icons/io";
 import { CastContext } from "../context/CastProvider";
 import Cast from "../components/Cast";
 import ItemBar from "../components/ItemBar";
-import { TrailerContext } from "../context/TrailerProvider";
 
 const MovieDetailPage = styled.div`
   position: relative;
   min-height: 100vh;
-`;
-
-const VideoPopup = styled.div`
-  ${({ playTrailer }) =>
-    playTrailer && {
-      position: "absolute",
-      top: 0,
-      zIndex: "5000",
-      width: "100%",
-      height: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: " rgb(15, 15, 15)",
-    }}
-
-  div iframe {
-    width: 64rem !important;
-    height: 36rem !important;
-
-    @media screen and (max-width: 760px) {
-      width: 48rem !important;
-      height: 30rem !important;
-    }
-
-    @media screen and (max-width: 560px) {
-      width: 34rem !important;
-      height: 24rem !important;
-    }
-
-    @media screen and (max-width: 380px) {
-      width: 26rem !important;
-      height: 20rem !important;
-    }
-  }
-`;
-const Cross = styled.div`
-  cursor: pointer;
-  position: fixed;
-  top: 4rem;
-  right: 5rem;
-  svg {
-    font-size: 4rem;
-  }
 `;
 
 const MovieContainer = styled.div`
@@ -65,8 +19,8 @@ const MovieContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  display: ${({ playTrailer }) => playTrailer && "none"};
 `;
+
 const MovieInfoWrapper = styled.div`
   width: 83%;
 
@@ -128,7 +82,7 @@ const PosterImage = styled.img`
 const Right = styled.div`
   position: absolute;
   left: 32rem;
-  top: -22rem;
+  top: -24rem;
   max-width: 73%;
 
   @media screen and (max-width: 1280px) {
@@ -258,55 +212,6 @@ const TrailerHeading = styled.h1`
   }
 `;
 
-const Button = styled.button`
-  cursor: pointer;
-  padding: 1.4rem 2.4rem;
-  font-weight: bold;
-  font-size: 2rem;
-  border-radius: 3rem;
-  text-transform: capitalize;
-
-  @media screen and (max-width: 760px) {
-    font-size: 1.6rem;
-    padding: 1.4rem 2rem;
-  }
-
-  @media screen and (max-width: 560px) {
-    font-size: 1.5rem;
-    padding: 1.2rem 1.6rem;
-  }
-`;
-
-const MovieLinks = styled.div`
-  margin-top: 3rem;
-  padding: 0 2rem;
-  display: flex;
-  gap: 18rem;
-  align-items: center;
-
-  @media screen and (max-width: 760px) {
-    gap: 5rem;
-  }
-
-  @media screen and (max-width: 560px) {
-    gap: 4rem;
-  }
-
-  @media screen and (max-width: 380px) {
-    gap: 1.8rem;
-  }
-`;
-const Title = styled.div`
-  font-size: 2.7rem;
-
-  @media screen and (max-width: 760px) {
-    font-size: 2rem;
-  }
-
-  @media screen and (max-width: 560px) {
-    font-size: 1.6rem;
-  }
-`;
 const LinkContainer = styled.div`
   margin-top: 4rem;
 `;
@@ -375,7 +280,6 @@ const Movie = () => {
   const { id } = useParams();
 
   const { movieCast, setMovieCast } = useContext(CastContext);
-  const { playTrailer, setPlayTrailer } = useContext(TrailerContext);
 
   useEffect(() => {
     getMovieDetails();
@@ -396,7 +300,7 @@ const Movie = () => {
     }
   };
 
-  const trailer = movieDetails.videos.results.find(
+  const trailer = movieDetails?.videos?.results.find(
     (video) => video.name === "Official Trailer" || video.site === "YouTube"
   );
   const renderTrailer = () => {
@@ -440,7 +344,7 @@ const Movie = () => {
   return (
     movieDetails && (
       <MovieDetailPage key={id}>
-        <MovieContainer playTrailer={playTrailer}>
+        <MovieContainer>
           <MovieInfoWrapper>
             <MovieBackground>
               <BackgroundImage

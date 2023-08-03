@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const LogoContainer = styled.span`
-  font-size: 4rem;
+  font-size: 3rem;
   text-transform: uppercase;
   letter-spacing: 3px;
 
@@ -14,7 +14,7 @@ const LogoContainer = styled.span`
   }
 
   span {
-    font-size: 4rem;
+    font-size: 3rem;
     text-transform: uppercase;
     color: red;
     font-weight: bolder;
