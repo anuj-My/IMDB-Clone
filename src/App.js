@@ -44,7 +44,7 @@ function App() {
         <Route path="movie/:id" element={<Movie />} />
         <Route path="movies/:type" element={<MoviesPage />} />
         <Route path="search" element={<SearchList />} />
-        {/* <Route path="/*" element={<ErrorPage />} />  */}
+        {/* <Route path="/*" element={<ErrorPages />} />  */}
       </Routes>
       <Footer />
     </div>
