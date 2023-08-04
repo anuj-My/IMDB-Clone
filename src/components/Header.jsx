@@ -20,7 +20,7 @@ const HeaderContainer = styled.header`
   transform: translateY(${({ scroll }) => (scroll ? 0 : -10)}rem);
 
   @media screen and (max-width: 750px) {
-    height: 8rem;
+    height: 6rem;
     transform: translateY(${({ scroll }) => (scroll ? 0 : -8)}rem);
     justify-content: flex-start;
     gap: 1rem;
@@ -61,21 +61,13 @@ const HeaderLeft = styled.div`
 const Btn = styled(HiMenuAlt1)`
   position: fixed;
   z-index: 111;
-  top: 3.5rem;
+  top: 1.8rem;
   right: 3rem;
   font-size: 2.5rem;
   cursor: pointer;
 
   @media screen and (min-width: 750px) {
     display: none;
-  }
-
-  @media screen and (max-width: 750px) {
-    top: 2.8rem;
-  }
-
-  @media screen and (max-width: 550px) {
-    right: 1rem;
   }
 `;
 

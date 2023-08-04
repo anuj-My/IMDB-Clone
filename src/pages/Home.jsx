@@ -17,6 +17,8 @@ const CustomCarousel = styled(Carousel)`
 
 const Wrapper = styled.div`
   margin-top: 12rem;
+  /* width: 100%;
+  margin: auto; */
 
   @media screen and (max-width: 760px) {
     margin-top: 5rem;

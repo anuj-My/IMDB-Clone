@@ -59,7 +59,6 @@ const MovieDetailContainer = styled.div`
   height: 23rem;
 
   @media screen and (max-width: 860px) {
-    /* position: static; */
     height: 0;
     margin-bottom: 4rem;
   }
@@ -198,14 +197,13 @@ const SynopsisText = styled.div`
 `;
 
 const TrailerContainer = styled.div`
-  margin-top: 7rem;
+  margin-top: 8rem;
+  padding: 0 2rem;
 `;
 
 const TrailerHeading = styled.h1`
-  padding-left: 2rem;
   font-size: 3.6rem;
-  letter-spacing: 1.5px;
-  text-transform: capitalize;
+  letter-spacing: 1.2px;
 
   @media screen and (max-width: 760px) {
     font-size: 3rem;
@@ -255,8 +253,8 @@ const ImdbLink = styled(HomepageLink)`
 `;
 
 const SimilarMovieList = styled.div`
-  width: 83%;
-  padding-top: 5rem;
+  width: 98%;
+  padding-top: 8rem;
   margin: auto;
 
   @media screen and (max-width: 820px) {
@@ -265,14 +263,26 @@ const SimilarMovieList = styled.div`
 `;
 const SimilarMovieHead = styled.h1`
   margin-bottom: 2rem;
-  text-align: center;
+  font-size: 3.6rem;
+  letter-spacing: 1.5px;
+  text-transform: capitalize;
+
+  @media screen and (max-width: 760px) {
+    font-size: 3rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 2.5rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    font-size: 2rem;
+  }
 `;
 const SmList = styled.div`
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fill, 22rem);
-  grid-template-rows: masonry;
-  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
 `;
 
 const Movie = () => {
@@ -308,14 +318,14 @@ const Movie = () => {
   );
   const renderTrailer = () => {
     const opts = {
-      height: "460",
+      height: "400",
       width: "100%",
     };
     return (
       <YouTube
         videoId={trailer?.key}
         opts={opts}
-        style={{ margin: "5rem 0" }}
+        style={{ margin: "2rem 0" }}
       />
     );
   };
@@ -408,7 +418,7 @@ const Movie = () => {
           </MovieDetailContainer>
           {/* cast ---------- */}
           <TrailerContainer>
-            <TrailerHeading>{trailer.name}</TrailerHeading>
+            <TrailerHeading>{trailer?.name}</TrailerHeading>
 
             {movieDetails.videos ? renderTrailer() : null}
           </TrailerContainer>
@@ -419,7 +429,7 @@ const Movie = () => {
         <ItemBar items={movieDetails.production_companies} />
 
         <SimilarMovieList>
-          <SimilarMovieHead>Similar Movies:</SimilarMovieHead>
+          <SimilarMovieHead>Related Movies</SimilarMovieHead>
           <SmList>
             {similarMovies && similarMovies.length ? (
               similarMovies.map((movie) => {

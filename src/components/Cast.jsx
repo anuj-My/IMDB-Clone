@@ -3,9 +3,11 @@ import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import styled from "styled-components";
 import ImageInfoCard from "./ImageInfoCard";
 
-const Casts = styled.div``;
+const Casts = styled.div`
+  padding: 0 2rem;
+  margin-top: 8rem;
+`;
 const CastsHeading = styled.h1`
-  padding-left: 2rem;
   font-size: 3.6rem;
   letter-spacing: 1.5px;
   text-transform: capitalize;
