@@ -108,9 +108,11 @@ const Right = styled.div`
     width: 98%;
   }
 `;
+
 const DetailRightTop = styled.div`
   margin-bottom: 4rem;
 `;
+
 const Name = styled.h1`
   margin-bottom: 0.6rem;
   text-transform: capitalize;
@@ -161,6 +163,7 @@ const ReleaseDate = styled.div`
 const Genres = styled.div`
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
 `;
 const Genre = styled.span`
   display: inline-block;
@@ -168,7 +171,7 @@ const Genre = styled.span`
   border-radius: 2rem;
   padding: 0.5rem 2rem;
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 1064px) {
     font-size: 1.4rem;
     padding: 0.5rem 1.3rem;
   }

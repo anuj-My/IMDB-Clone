@@ -52,9 +52,10 @@ const PosterOverlay = styled.div`
   }
 `;
 const Title = styled.div`
-  font-size: 6rem;
+  font-size: 5rem;
   font-weight: 900;
   margin-bottom: 1rem;
+  text-align: left;
 
   @media screen and (max-width: 760px) {
     font-size: 4rem;
