@@ -5,7 +5,7 @@ import Card from "./Card";
 import Search from "./Search";
 
 const SearchListContainer = styled.div`
-  width: 98%;
+  width: 96%;
   padding-top: 14rem;
   margin: auto;
   min-height: 100vh;

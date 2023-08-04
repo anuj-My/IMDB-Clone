@@ -42,7 +42,6 @@ const MovieBackground = styled.div`
   );
 
   @media screen and (max-width: 860px) {
-    /* position: static; */
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
   }
@@ -87,7 +86,7 @@ const Right = styled.div`
   position: absolute;
   left: 32rem;
   top: -24rem;
-  max-width: 73%;
+  width: 73%;
 
   @media screen and (max-width: 1280px) {
     width: 60%;
@@ -95,7 +94,7 @@ const Right = styled.div`
 
   @media screen and (max-width: 860px) {
     left: 2rem;
-    top: -55rem;
+    top: -62rem;
     width: 70%;
   }
 
@@ -104,7 +103,7 @@ const Right = styled.div`
   }
 
   @media screen and (max-width: 560px) {
-    width: 98%;
+    width: 93%;
   }
 `;
 
@@ -163,6 +162,10 @@ const Genres = styled.div`
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
+
+  @media screen and (max-width: 560px) {
+    gap: 1rem;
+  }
 `;
 const Genre = styled.span`
   display: inline-block;
@@ -173,6 +176,10 @@ const Genre = styled.span`
   @media screen and (max-width: 1064px) {
     font-size: 1.4rem;
     padding: 0.5rem 1.3rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 1.2rem;
   }
 `;
 const DetailRightBottom = styled.div``;
@@ -253,13 +260,9 @@ const ImdbLink = styled(HomepageLink)`
 `;
 
 const SimilarMovieList = styled.div`
-  width: 98%;
+  width: 96%;
   padding-top: 8rem;
   margin: auto;
-
-  @media screen and (max-width: 820px) {
-    width: 98%;
-  }
 `;
 const SimilarMovieHead = styled.h1`
   margin-bottom: 2rem;
