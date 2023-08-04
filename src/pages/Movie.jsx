@@ -85,7 +85,7 @@ const PosterImage = styled.img`
 const Right = styled.div`
   position: absolute;
   left: 32rem;
-  top: -24rem;
+  top: -22rem;
   width: 73%;
 
   @media screen and (max-width: 1280px) {

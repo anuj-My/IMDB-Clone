@@ -35,7 +35,7 @@ const PosterOverlay = styled.div`
   justify-content: flex-end;
   flex-direction: column;
   width: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.587), rgba(0, 0, 0, 0.773));
   transition: opacity 0.3s;
 
   @media screen and (max-width: 760px) {

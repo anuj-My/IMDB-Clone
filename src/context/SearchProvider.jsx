@@ -27,7 +27,6 @@ const SearchProvider = ({ children }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     getMovieBySearch();
-    setSearchInput("");
   };
   const value = {
     searchInput,

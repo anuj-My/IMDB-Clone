@@ -4,9 +4,19 @@ import { SearchContext } from "../context/SearchProvider";
 import Card from "./Card";
 import Search from "./Search";
 
-const SearchListContainer = styled.div`
+const SearchListContainer = styled.div``;
+
+const Banner = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40vh;
+  background-color: #252525;
+`;
+
+const MoviesContainer = styled.div`
   width: 95%;
-  padding-top: 14rem;
   margin: auto;
   min-height: 100vh;
 `;
@@ -56,22 +66,26 @@ const SearchList = () => {
     useContext(SearchContext);
   return (
     <SearchListContainer>
-      <Search
-        onChangeHandler={onChangeHandler}
-        submitHandler={submitHandler}
-        searchInput={searchInput}
-      />
-      <Title>Search Results For: {searchInput}</Title>
-      {searchList === null && <Message>Please Search a Movie</Message>}
+      <Banner>
+        <Search
+          onChangeHandler={onChangeHandler}
+          submitHandler={submitHandler}
+          searchInput={searchInput}
+        />
+      </Banner>
+      <MoviesContainer>
+        <Title>Search Results For: {searchInput}</Title>
+        {searchList === null && <Message>Please Search a Movie</Message>}
 
-      {searchList && (
-        <ListCards>
-          {searchList &&
-            searchList.map((movie) => {
-              return <Card movie={movie} key={movie.id} />;
-            })}
-        </ListCards>
-      )}
+        {searchList && (
+          <ListCards>
+            {searchList &&
+              searchList.map((movie) => {
+                return <Card movie={movie} key={movie.id} />;
+              })}
+          </ListCards>
+        )}
+      </MoviesContainer>
     </SearchListContainer>
   );
 };

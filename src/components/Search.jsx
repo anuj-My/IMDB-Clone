@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin-top: 5rem;
+`;
 
-const Form = styled.form``;
+const Form = styled.form`
+  width: 100%;
+`;
 
 const Input = styled.input`
-  width: 100%;
+  width: 80rem;
   font-size: 1.6rem;
   border-radius: 0.5rem;
   padding: 1.6rem 2rem;
