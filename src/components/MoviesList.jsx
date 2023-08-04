@@ -6,7 +6,7 @@ import { MovieListContext } from "../context/MovieListProvider";
 import Card from "./Card";
 
 const MovieListContainer = styled.div`
-  max-width: 96%;
+  max-width: 95%;
   margin: auto;
   min-height: 100vh;
 `;

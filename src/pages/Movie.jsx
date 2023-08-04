@@ -94,7 +94,7 @@ const Right = styled.div`
 
   @media screen and (max-width: 860px) {
     left: 2rem;
-    top: -62rem;
+    top: -60rem;
     width: 70%;
   }
 
@@ -260,7 +260,7 @@ const ImdbLink = styled(HomepageLink)`
 `;
 
 const SimilarMovieList = styled.div`
-  width: 96%;
+  width: 95%;
   padding-top: 8rem;
   margin: auto;
 `;
