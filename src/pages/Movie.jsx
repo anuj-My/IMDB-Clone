@@ -233,7 +233,7 @@ const LinkContainer = styled.div`
 
 const HomepageLink = styled.a`
   color: white;
-  background-color: red;
+  background-color: #dc0000;
   padding: 1.4rem 2.4rem;
   border-radius: 6px;
   text-decoration: none;

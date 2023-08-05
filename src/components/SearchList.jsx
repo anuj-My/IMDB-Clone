@@ -12,13 +12,14 @@ const Banner = styled.div`
   align-items: center;
   width: 100%;
   height: 40vh;
-  background-color: #252525;
+  background: url("https://images.pexels.com/photos/3094799/pexels-photo-3094799.jpeg?auto=compress&cs=tinysrgb&w=600")
+    center center/cover no-repeat;
 `;
 
 const MoviesContainer = styled.div`
   width: 95%;
   margin: auto;
-  min-height: 100vh;
+  min-height: 50vh;
 `;
 const Title = styled.h2`
   margin-bottom: 3rem;
@@ -43,10 +44,8 @@ const Message = styled.p`
   color: #e1e1e191;
   font-weight: 500;
   font-size: 4rem;
-  display: grid;
-  height: 55vh;
-  justify-content: center;
-  align-items: center;
+
+  text-align: center;
 
   @media screen and (max-width: 760px) {
     font-size: 2.7rem;

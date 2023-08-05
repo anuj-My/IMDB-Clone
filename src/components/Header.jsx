@@ -16,7 +16,7 @@ const HeaderContainer = styled.header`
   top: 0;
   z-index: 100;
   transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-  background-color: #1c1c1c;
+  background-color: #131313;
   transform: translateY(${({ scroll }) => (scroll ? 0 : -10)}rem);
 
   @media screen and (max-width: 750px) {

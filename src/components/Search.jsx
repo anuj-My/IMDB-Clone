@@ -1,52 +1,90 @@
 import styled from "styled-components";
-
-const Container = styled.div`
-  margin-top: 5rem;
-`;
+import { BiSearchAlt } from "react-icons/bi";
 
 const Form = styled.form`
-  width: 100%;
+  width: 80%;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  border-radius: 6rem;
+  padding: 4px 1.4rem;
+  backdrop-filter: blur(4px) saturate(180%);
+  margin: 8rem 0 0 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  @media screen and (max-width: 780px) {
+    padding: 6px 1rem;
+  }
 `;
 
 const Input = styled.input`
-  width: 80rem;
+  background-color: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 6px 20px;
+  height: 50px;
   font-size: 1.6rem;
-  border-radius: 0.5rem;
-  padding: 1.6rem 2rem;
-  font-weight: bold;
-  background-color: #00000082;
-  border: 2px solid white;
-  color: white;
+  color: #131313;
+  width: 100%;
 
-  @media screen and (max-width: 750px) {
-    padding: 1rem 1.4rem;
+  @media screen and (max-width: 780px) {
+    padding: 1.8rem 1.4rem;
+  }
+  @media screen and (max-width: 550px) {
+    padding: 1.2rem 1rem;
+    height: 40px;
+  }
 
-    &::placeholder {
-      font-size: 1.4rem;
+  &::placeholder {
+    color: #131313;
+
+    @media screen and (max-width: 550px) {
+      font-size: 1.5rem;
     }
   }
+`;
+
+const Button = styled.button`
+  border: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #dc0000;
+  cursor: pointer;
 
   @media screen and (max-width: 550px) {
-    padding: 1rem;
+    width: 3rem;
+    height: 3rem;
   }
 
-  &:focus {
-    box-shadow: rgba(101, 101, 101, 0.35) 0px 5px 15px;
+  svg {
+    font-size: 2rem;
+    color: #fafafa;
+
+    @media screen and (max-width: 780px) {
+      font-size: 1.8rem;
+    }
+
+    @media screen and (max-width: 550px) {
+      font-size: 1.5rem;
+    }
   }
 `;
 
 const Search = ({ onChangeHandler, submitHandler, searchInput }) => {
   return (
-    <Container>
-      <Form onSubmit={submitHandler}>
-        <Input
-          type="search"
-          onChange={onChangeHandler}
-          value={searchInput}
-          placeholder="Search movies"
-        />
-      </Form>
-    </Container>
+    <Form onSubmit={submitHandler}>
+      <Input
+        type="search"
+        onChange={onChangeHandler}
+        value={searchInput}
+        placeholder="Search movies"
+      />
+      <Button type="submit">
+        <BiSearchAlt />
+      </Button>
+    </Form>
   );
 };
 

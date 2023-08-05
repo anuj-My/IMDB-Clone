@@ -4,7 +4,7 @@ import { LinkData } from "../data";
 const NavLinkList = () => {
   function activeLinkStyles({ isActive }) {
     return {
-      color: isActive && "#b20c0c",
+      color: isActive && "#dc0000",
     };
   }
 
